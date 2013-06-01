@@ -23,8 +23,14 @@ DATABASES = {
 # Parse database configuration from $DATABASE_URL
 import dj_database_url
 heroku_config = dj_database_url.config()
-if heroku_config:  # skip for local dev
+if heroku_config:
     DATABASES['default'] = heroku_config
+
+else:  # local dev
+    DEBUG = True
+
+LOGIN_REDIRECT_URL = '/'
+
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

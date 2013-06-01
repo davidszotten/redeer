@@ -2,10 +2,11 @@ import datetime
 import time
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
 
 from redeer.api.forms import MarkForm
+from redeer.api.models import ApiKey
 from redeer.feeds.models import Group, Feed, Item, to_comma_separated
 
 
@@ -34,10 +35,14 @@ def get_list(string):
 
 @csrf_exempt
 def api(request):
-    print
-    print
-    print 'GET', request.GET
-    print 'POST', request.POST
+    # print 'GET', request.GET
+    # print 'POST', request.POST
+    password = request.POST.get('api_key')
+    try:
+        ApiKey.objects.get(md5=password)
+    except ApiKey.DoesNotExist:
+        return HttpResponseForbidden("Invalid API key")
+
 
     response = {
         "api_version": 3,
@@ -83,18 +88,11 @@ def api(request):
         response['unread_item_ids'] = to_comma_separated(
             Item.objects.filter(is_read=False).values_list('pk', flat=True))
 
-    # mark = request.GET.get('mark')
     mark_form = MarkForm(request.POST or None)
     mark_form.do_action()
 
-    # if mark == 'item':
-        # mark_as = request.GET.get('as')
-        # if mark_as == 'read':
-            # Item.objects.filter(
-
-
-    print "returning"
-    import pprint
-    pprint.pprint(response)
+    # print "returning"
+    # import pprint
+    # pprint.pprint(response)
 
     return json_response(response)
