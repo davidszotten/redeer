@@ -1,6 +1,6 @@
 # Django settings for redeer project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -11,7 +11,7 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # postgresql_psycopg2
+        'ENGINE': 'django.db.backends.', # postgresql_psycopg2
         'NAME': 'redeer.db',
         'USER': '',
         'PASSWORD': '',
@@ -29,7 +29,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'http://redeer.herokuapp.com']
 
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
