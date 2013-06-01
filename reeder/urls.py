@@ -5,7 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'reeder.api.views.index', name='index'),
+    url(r'^api/$', 'reeder.api.views.index', name='index'),
     url(r'^feeds/', include('reeder.feeds.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
