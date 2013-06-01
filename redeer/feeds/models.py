@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 
-from reeder.feeds.utils import to_timestamp
+from redeer.feeds.utils import to_timestamp
 
 
 def to_comma_separated(lst):
@@ -51,7 +51,7 @@ class Feed(models.Model):
     def to_dict(self):
         return {
             'id': self.pk,
-            # 'favicon_id':  reeder handles this by itself
+            # 'favicon_id':  redeer handles this by itself
             'title': self.title,
             'url': self.url,
             'site_url': self.website,

@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
 
-from reeder.feeds.models import Group
-from reeder.feeds.upload import import_google_reader
-from reeder.gui.forms import UploadForm
+from redeer.feeds.models import Group
+from redeer.feeds.upload import import_google_reader
+from redeer.gui.forms import UploadForm
 
 
 def index(request):

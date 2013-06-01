@@ -1,6 +1,6 @@
 from xml.dom.minidom import parse
 
-from reeder.feeds.models import Group, Feed
+from redeer.feeds.models import Group, Feed
 
 
 def import_google_reader(file_handle):

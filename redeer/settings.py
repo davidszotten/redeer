@@ -1,4 +1,4 @@
-# Django settings for reeder project.
+# Django settings for redeer project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -12,7 +12,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # postgresql_psycopg2
-        'NAME': 'reeder.db',
+        'NAME': 'redeer.db',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
@@ -85,10 +85,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'reeder.urls'
+ROOT_URLCONF = 'redeer.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'reeder.wsgi.application'
+WSGI_APPLICATION = 'redeer.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -107,9 +107,9 @@ INSTALLED_APPS = (
 
     'south',
 
-    'reeder.api',
-    'reeder.feeds',
-    'reeder.gui',
+    'redeer.api',
+    'redeer.feeds',
+    'redeer.gui',
 )
 
 # A sample logging configuration. The only tangible logging

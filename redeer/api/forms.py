@@ -1,6 +1,6 @@
 from django import forms
 
-from reeder.feeds.models import Group, Feed, Item
+from redeer.feeds.models import Group, Feed, Item
 
 
 def as_choices(iterable):

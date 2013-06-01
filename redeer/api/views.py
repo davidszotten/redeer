@@ -5,8 +5,8 @@ import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from reeder.api.forms import MarkForm
-from reeder.feeds.models import Group, Feed, Item, to_comma_separated
+from redeer.api.forms import MarkForm
+from redeer.feeds.models import Group, Feed, Item, to_comma_separated
 
 
 def to_timestamp(dt):
@@ -62,6 +62,7 @@ def api(request):
         response['links'] = []
 
     if 'items' in request.GET:
+        items = []
         if 'since_id' in request.GET:
             since_id = get_int(request.GET['since_id'])
             items = Item.objects.filter(pk__gt=since_id

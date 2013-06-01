@@ -1,6 +1,6 @@
 from django.core.management.base import NoArgsCommand
 
-from reeder.feeds.sync import sync_all
+from redeer.feeds.sync import sync_all
 
 class Command(NoArgsCommand):
     help = 'Sync all feeds'

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from reeder.feeds.models import Group, Feed, Item
+from redeer.feeds.models import Group, Feed, Item
 
 
 class FeedAdmin(admin.ModelAdmin):

@@ -5,7 +5,7 @@ from django.db import transaction
 import eventlet
 feedparser = eventlet.import_patched('feedparser')
 
-from reeder.feeds.models import Feed, Item
+from redeer.feeds.models import Feed, Item
 
 
 _logger = logging.getLogger(__name__)
