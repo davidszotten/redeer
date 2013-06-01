@@ -5,9 +5,6 @@ from django.db import models
 from reeder.feeds.utils import to_timestamp
 
 
-DEFAULT_MAX = 500
-
-
 def to_comma_separated(lst):
     return ','.join(map(str, lst))
 
@@ -17,7 +14,7 @@ def mark_read(qs, is_read):
 
 
 class Group(models.Model):
-    title = models.CharField(max_length=DEFAULT_MAX)
+    title = models.TextField()
 
     def __unicode__(self):
         return self.title
@@ -42,9 +39,9 @@ class Group(models.Model):
 
 
 class Feed(models.Model):
-    title = models.CharField(max_length=DEFAULT_MAX)
-    url = models.CharField(max_length=DEFAULT_MAX)
-    website = models.CharField(max_length=DEFAULT_MAX)
+    title = models.TextField()
+    url = models.TextField()
+    website = models.TextField()
     group = models.ForeignKey(Group)
     last_updated = models.IntegerField(blank=True, null=True)
 
@@ -54,7 +51,7 @@ class Feed(models.Model):
     def to_dict(self):
         return {
             'id': self.pk,
-            # 'favicon_id':
+            # 'favicon_id':  reeder handles this by itself
             'title': self.title,
             'url': self.url,
             'site_url': self.website,
@@ -83,9 +80,9 @@ last_updated_on_time (Unix timestamp/integer)
 class Item(models.Model):
     feed = models.ForeignKey(Feed)
     title = models.TextField()
-    author = models.CharField(max_length=DEFAULT_MAX)
+    author = models.TextField()
     html = models.TextField()
-    url = models.CharField(max_length=DEFAULT_MAX)
+    url = models.TextField()
     is_saved = models.BooleanField()
     is_read = models.BooleanField()
     created_on_time = models.IntegerField()

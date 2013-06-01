@@ -11,16 +11,16 @@ class Migration(SchemaMigration):
         # Adding model 'Group'
         db.create_table(u'feeds_group', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=500)),
+            ('title', self.gf('django.db.models.fields.TextField')()),
         ))
         db.send_create_signal(u'feeds', ['Group'])
 
         # Adding model 'Feed'
         db.create_table(u'feeds_feed', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=500)),
-            ('url', self.gf('django.db.models.fields.CharField')(max_length=500)),
-            ('website', self.gf('django.db.models.fields.CharField')(max_length=500)),
+            ('title', self.gf('django.db.models.fields.TextField')()),
+            ('url', self.gf('django.db.models.fields.TextField')()),
+            ('website', self.gf('django.db.models.fields.TextField')()),
             ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['feeds.Group'])),
             ('last_updated', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
         ))
@@ -31,9 +31,9 @@ class Migration(SchemaMigration):
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('feed', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['feeds.Feed'])),
             ('title', self.gf('django.db.models.fields.TextField')()),
-            ('author', self.gf('django.db.models.fields.CharField')(max_length=500)),
+            ('author', self.gf('django.db.models.fields.TextField')()),
             ('html', self.gf('django.db.models.fields.TextField')()),
-            ('url', self.gf('django.db.models.fields.CharField')(max_length=500)),
+            ('url', self.gf('django.db.models.fields.TextField')()),
             ('is_saved', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('is_read', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('created_on_time', self.gf('django.db.models.fields.IntegerField')()),
@@ -58,18 +58,18 @@ class Migration(SchemaMigration):
             'group': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['feeds.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'last_updated': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
-            'website': ('django.db.models.fields.CharField', [], {'max_length': '500'})
+            'title': ('django.db.models.fields.TextField', [], {}),
+            'url': ('django.db.models.fields.TextField', [], {}),
+            'website': ('django.db.models.fields.TextField', [], {})
         },
         u'feeds.group': {
             'Meta': {'object_name': 'Group'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '500'})
+            'title': ('django.db.models.fields.TextField', [], {})
         },
         u'feeds.item': {
             'Meta': {'object_name': 'Item'},
-            'author': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
+            'author': ('django.db.models.fields.TextField', [], {}),
             'created_on_time': ('django.db.models.fields.IntegerField', [], {}),
             'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['feeds.Feed']"}),
             'html': ('django.db.models.fields.TextField', [], {}),
@@ -77,7 +77,7 @@ class Migration(SchemaMigration):
             'is_read': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'is_saved': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'title': ('django.db.models.fields.TextField', [], {}),
-            'url': ('django.db.models.fields.CharField', [], {'max_length': '500'})
+            'url': ('django.db.models.fields.TextField', [], {})
         }
     }
 
