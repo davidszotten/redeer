@@ -22,7 +22,7 @@ class Migration(SchemaMigration):
             ('url', self.gf('django.db.models.fields.CharField')(max_length=500)),
             ('website', self.gf('django.db.models.fields.CharField')(max_length=500)),
             ('group', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['feeds.Group'])),
-            ('last_updated', self.gf('django.db.models.fields.IntegerField')()),
+            ('last_updated', self.gf('django.db.models.fields.IntegerField')(null=True, blank=True)),
         ))
         db.send_create_signal(u'feeds', ['Feed'])
 
@@ -57,7 +57,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Feed'},
             'group': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['feeds.Group']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'last_updated': ('django.db.models.fields.IntegerField', [], {}),
+            'last_updated': ('django.db.models.fields.IntegerField', [], {'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
             'url': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
             'website': ('django.db.models.fields.CharField', [], {'max_length': '500'})

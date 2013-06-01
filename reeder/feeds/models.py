@@ -46,7 +46,7 @@ class Feed(models.Model):
     url = models.CharField(max_length=DEFAULT_MAX)
     website = models.CharField(max_length=DEFAULT_MAX)
     group = models.ForeignKey(Group)
-    last_updated = models.IntegerField()
+    last_updated = models.IntegerField(blank=True, null=True)
 
     def __unicode__(self):
         return self.title
