@@ -29,7 +29,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['localhost', 'http://redeer.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', 'redeer.herokuapp.com']
 
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
