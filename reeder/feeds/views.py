@@ -14,7 +14,7 @@ def upload(request):
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
             import_google_reader(request.FILES['reader_xml'])
-            redirect('upload-succes')
+            return redirect('upload-succes')
     else:
         form = UploadForm()
 
