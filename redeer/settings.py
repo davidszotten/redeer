@@ -29,6 +29,7 @@ if heroku_config:
 else:  # local dev
     DEBUG = True
 
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
 
