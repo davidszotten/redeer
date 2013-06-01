@@ -33,7 +33,7 @@ def get_list(string):
 
 
 @csrf_exempt
-def index(request):
+def api(request):
     print
     print
     print 'GET', request.GET
