@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="jumbotron">
+        <p class="lead">
+        Import from google reader. (You may need to 
+            <a href="https://www.google.com/reader/subscriptions/export?hl=en">
+            export first</a>)
+        </p>
+  </div>
+
+    <form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {{ form.reader_xml }}</br>
+
+    <input type="submit"/>
+
+    </form>
+
+{% endblock content %}
+

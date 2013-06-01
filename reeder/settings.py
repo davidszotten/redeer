@@ -109,6 +109,7 @@ INSTALLED_APPS = (
 
     'reeder.api',
     'reeder.feeds',
+    'reeder.gui',
 )
 
 # A sample logging configuration. The only tangible logging

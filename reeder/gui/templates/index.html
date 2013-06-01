@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="jumbotron">
+        <p class="lead">
+        Self-hosted backend for use with Reeder
+        </p>
+
+    {% if groups %}
+        Found feeds:
+        {% for group in groups %}
+            <p class="lead">
+                {{ group }}
+            </p>
+            {% for feed in group.feed_set.all %}
+                &bull; {{ feed }}
+            {% endfor %}
+        {% endfor %}
+    {% else %}
+
+        <p class="lead">
+            No feeds found.
+        <a href="/upload/">Get started</a>
+        </p>
+    {% endif %}
+
+  </div>
+
+{% endblock content %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+  <div class="jumbotron">
+        <p class="lead">
+        Upload succesful. Imported feeds:
+        </p>
+
+    {% for group in groups %}
+        <p class="lead">
+            {{ group }}
+        </p>
+        {% for feed in group.feed_set.all %}
+            &bull; {{ feed }}
+        {% endfor %}
+    {% endfor %}
+  </div>
+{% endblock content %}
+
