@@ -3,10 +3,11 @@ from xml.dom.minidom import parse
 from redeer.feeds.models import Group, Feed
 
 
-def import_google_reader(file_handle):
+def import_google_reader(user_id, file_handle):
     parser = HandleGoogleReader(file_handle)
     for feed in parser.feeds.values():
-        group, _ = Group.objects.get_or_create(title=feed['group'])
+        group, _ = Group.objects.get_or_create(
+            user_id=user_id, title=feed['group'])
         Feed.objects.get_or_create(
             title=feed['title'],
             url=feed['xmlUrl'],
@@ -41,8 +42,11 @@ class HandleGoogleReader(object):
     def handle_group(self, group):
         attributes = dict(group.attributes.items())
         title = attributes['title']
-        for feed in self.childOutlines(group):
-            self.handle_feed(feed, title)
+        if attributes.get('type') == 'rss':
+            self.handle_feed(group, 'General')
+        else:
+            for feed in self.childOutlines(group):
+                self.handle_feed(feed, title)
 
     def handle_feed(self, feed, group_name):
         attributes = dict(feed.attributes.items())

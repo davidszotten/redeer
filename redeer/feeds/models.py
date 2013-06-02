@@ -13,8 +13,24 @@ def mark_read(qs, is_read):
     qs.update(is_read=is_read)
 
 
+class ForUserManager(models.Manager):
+    def for_user(self, user):
+        lookups = {
+            Group: 'user',
+            Feed: 'group__user',
+            Item: 'feed__group__user',
+        }
+        lookup = lookups[self.model]
+        if isinstance(user, int):
+            lookup += '_id'
+        return self.get_query_set().filter(**{lookup: user})
+
+
 class Group(models.Model):
+    user = models.ForeignKey('auth.User')
     title = models.TextField()
+
+    objects = ForUserManager()
 
     def __unicode__(self):
         return self.title
@@ -44,6 +60,8 @@ class Feed(models.Model):
     website = models.TextField()
     group = models.ForeignKey(Group)
     last_updated = models.IntegerField(blank=True, null=True)
+
+    objects = ForUserManager()
 
     def __unicode__(self):
         return self.title
@@ -86,6 +104,8 @@ class Item(models.Model):
     is_saved = models.BooleanField()
     is_read = models.BooleanField()
     created_on_time = models.IntegerField()
+
+    objects = ForUserManager()
 
     def __unicode__(self):
         return self.title

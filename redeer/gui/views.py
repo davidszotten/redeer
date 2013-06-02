@@ -8,10 +8,7 @@ from redeer.gui.forms import UploadForm
 
 
 def index(request):
-    if request.user.is_authenticated():
-        groups = Group.objects.order_by('title')
-    else:
-        groups = []
+    groups = Group.objects.for_user(request.user.pk).order_by('title')
 
     return render(request, 'index.html', {
         'groups': groups
@@ -31,7 +28,7 @@ def upload(request):
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
-            import_google_reader(request.FILES['reader_xml'])
+            import_google_reader(request.user.pk, request.FILES['reader_xml'])
             return redirect('upload-succes')
     else:
         form = UploadForm()
@@ -42,5 +39,5 @@ def upload(request):
 @login_required
 def upload_success(request):
     return render(request, "upload_success.html", {
-        'groups': Group.objects.order_by('title'),
+        'groups': Group.objects.for_user(request.user.pk).order_by('title'),
     })
