@@ -1,4 +1,5 @@
 # Django settings for redeer project.
+import os
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -38,7 +39,8 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['localhost', 'redeer.herokuapp.com']
+DOMAIN_NAME = os.environ['DOMAIN_NAME']
+ALLOWED_HOSTS = [DOMAIN_NAME]
 
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
@@ -82,7 +84,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = '*fj(a@s$d9!kj_7cr3a9)n!w^s@56^$5u31nsj1wj48-djh788'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
