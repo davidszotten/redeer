@@ -51,7 +51,7 @@ class Group(models.Model):
         }
 
     def mark_read(self, is_read):
-        mark_read(Item.objects.filter(feed_group__id=self.pk), is_read)
+        mark_read(Item.objects.filter(feed__group__id=self.pk), is_read)
 
 
 class Feed(models.Model):

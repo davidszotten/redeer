@@ -27,10 +27,12 @@ heroku_config = dj_database_url.config()
 if heroku_config:
     DATABASES['default'] = heroku_config
     STATIC_ROOT = '/app/static_root'
+    SECRET_KEY = os.environ['SECRET_KEY']
 
 else:  # local dev
     DEBUG = True
     STATIC_ROOT = 'static_root'
+    SECRET_KEY = 'for testing only'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -41,8 +43,11 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-DOMAIN_NAME = os.environ['DOMAIN_NAME']
-ALLOWED_HOSTS = [DOMAIN_NAME]
+try:
+    DOMAIN_NAME = os.environ['DOMAIN_NAME']
+    ALLOWED_HOSTS = [DOMAIN_NAME]
+except KeyError:
+    ALLOWED_HOSTS =[]
 
 TIME_ZONE = 'Europe/London'
 LANGUAGE_CODE = 'en-gb'
@@ -85,9 +90,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ['SECRET_KEY']
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (

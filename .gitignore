@@ -1,2 +1,4 @@
 redeer.db
 static_root
+.coverage
+htmlcov
