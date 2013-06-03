@@ -19,7 +19,6 @@ Installation
 
     heroku run ./manage.py syncdb --noinput
     heroku run ./manage.py migrate
-    heroku run ./manage.py collectstatic --noinput
 
     heroku addons:add scheduler
     heroku addons:open scheduler
