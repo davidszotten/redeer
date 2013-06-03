@@ -51,50 +51,88 @@ class ManagerTest(TestCase):
 class GroupTest(TestCase):
     def setUp(self):
         self.user = User.objects.create(username='user')
-        self.group = Group.objects.create(user=self.user, title='title')
-        self.feed = Feed.objects.create(group=self.group)
+        self.group1 = Group.objects.create(user=self.user, title='title')
+        self.group2 = Group.objects.create(user=self.user, title='title')
+        self.feed1 = Feed.objects.create(group=self.group1)
+        self.feed2 = Feed.objects.create(group=self.group2)
+        self.item1 = Item.objects.create(feed=self.feed1, created_on_time=0)
+        self.item2 = Item.objects.create(feed=self.feed2, created_on_time=0)
 
     def test_unicode(self):
         self.assertEqual(
-            unicode(Group.objects.get()),
+            unicode(self.group1),
             'title',
         )
 
     def test_to_dict(self):
         self.assertEqual(
-            self.group.to_dict(),
+            self.group1.to_dict(),
             {
-                'id': self.group.pk,
+                'id': self.group1.pk,
                 'title': 'title',
             }
         )
 
     def test_feeds(self):
         self.assertEqual(
-            self.group.feed_ids(),
-            str(self.feed.pk)
+            self.group1.feed_ids(),
+            str(self.feed1.pk)
         )
 
     def test_feedgroup(self):
         self.assertEqual(
-            self.group.to_feedgroup_dict(),
+            self.group1.to_feedgroup_dict(),
             {
-                'group_id': self.group.pk,
-                'feed_ids': str(self.feed.pk),
+                'group_id': self.group1.pk,
+                'feed_ids': str(self.feed1.pk),
             }
         )
 
     def test_mark_as_read(self):
-        self.assertTrue(
-            all(
-                [not item.is_read for item in self.feed.item_set.all()]
-            )
-        )
+        self.assertFalse(Item.objects.get(pk=self.item1.pk).is_read)
+        self.assertFalse(Item.objects.get(pk=self.item2.pk).is_read)
 
-        self.group.mark_read(is_read=True)
+        self.group1.mark_read(is_read=True)
 
-        self.assertTrue(
-            all(
-                [item.is_read for item in self.feed.item_set.all()]
-            )
-        )
+        self.assertTrue(Item.objects.get(pk=self.item1.pk).is_read)
+        self.assertFalse(Item.objects.get(pk=self.item2.pk).is_read)
+
+
+class FeedTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='user')
+        self.group1 = Group.objects.create(user=self.user, title='title')
+        self.group2 = Group.objects.create(user=self.user, title='title')
+        self.feed1 = Feed.objects.create(group=self.group1)
+        self.feed2 = Feed.objects.create(group=self.group2)
+        self.item1 = Item.objects.create(feed=self.feed1, created_on_time=0)
+        self.item2 = Item.objects.create(feed=self.feed2, created_on_time=0)
+
+    def test_mark_as_read(self):
+        self.assertFalse(Item.objects.get(pk=self.item1.pk).is_read)
+        self.assertFalse(Item.objects.get(pk=self.item2.pk).is_read)
+
+        self.feed1.mark_read(is_read=True)
+
+        self.assertTrue(Item.objects.get(pk=self.item1.pk).is_read)
+        self.assertFalse(Item.objects.get(pk=self.item2.pk).is_read)
+
+
+class ItemTest(TestCase):
+    def setUp(self):
+        self.user = User.objects.create(username='user')
+        self.group1 = Group.objects.create(user=self.user, title='title')
+        self.group2 = Group.objects.create(user=self.user, title='title')
+        self.feed1 = Feed.objects.create(group=self.group1)
+        self.feed2 = Feed.objects.create(group=self.group2)
+        self.item1 = Item.objects.create(feed=self.feed1, created_on_time=0)
+        self.item2 = Item.objects.create(feed=self.feed2, created_on_time=0)
+
+    def test_mark_as_read(self):
+        self.assertFalse(Item.objects.get(pk=self.item1.pk).is_read)
+        self.assertFalse(Item.objects.get(pk=self.item2.pk).is_read)
+
+        self.item1.mark_read(is_read=True)
+
+        self.assertTrue(Item.objects.get(pk=self.item1.pk).is_read)
+        self.assertFalse(Item.objects.get(pk=self.item2.pk).is_read)
