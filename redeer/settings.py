@@ -26,9 +26,11 @@ import dj_database_url
 heroku_config = dj_database_url.config()
 if heroku_config:
     DATABASES['default'] = heroku_config
+    STATIC_ROOT = ''
 
 else:  # local dev
     DEBUG = True
+    STATIC_ROOT = 'static_root'
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -62,8 +64,8 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-CWD = os.path.dirname(os.path.realpath(__file__))
-STATIC_ROOT = os.path.join(CWD, 'static_root')
+# CWD = os.path.dirname(os.path.realpath(__file__))
+# STATIC_ROOT = os.path.join(CWD, 'static_root')
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
