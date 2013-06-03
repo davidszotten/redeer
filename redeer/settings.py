@@ -26,7 +26,7 @@ import dj_database_url
 heroku_config = dj_database_url.config()
 if heroku_config:
     DATABASES['default'] = heroku_config
-    STATIC_ROOT = ''
+    STATIC_ROOT = '/app/static_root'
 
 else:  # local dev
     DEBUG = True
