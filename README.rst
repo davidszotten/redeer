@@ -30,7 +30,7 @@ Add an hourly task that runs ``./manage.py sync_all``
 Inspired by `Stringer <https://github.com/swanson/stringer>`_
 
 Why not use Stringer
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
 It didn't support groups, which I need (well, want). Tried to contribute a
 patch, but having never really used ruby I gave up and built my own in python.
