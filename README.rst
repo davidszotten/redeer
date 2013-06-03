@@ -8,6 +8,7 @@ Installation
 ------------
 
 ::
+
     git clone git://github.com/davidszotten/redeer.git
     cd redeer
     heroku create
