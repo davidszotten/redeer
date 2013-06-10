@@ -77,8 +77,11 @@ class Feed(models.Model):
             'last_updated_on_time': self.last_updated,
         }
 
-    def set_last_updated(self):
-        self.last_updated = to_timestamp(datetime.datetime.now())
+    def set_last_updated(self, modified_at=None):
+        if modified_at is None:
+            self.last_updated = to_timestamp(datetime.datetime.now())
+        else:
+            self.last_updated = modified_at
         self.save()
 
     def mark_read(self, is_read):
@@ -96,6 +99,7 @@ last_updated_on_time (Unix timestamp/integer)
 
 
 class Item(models.Model):
+    item_id = models.TextField()
     feed = models.ForeignKey(Feed)
     title = models.TextField()
     author = models.TextField()
